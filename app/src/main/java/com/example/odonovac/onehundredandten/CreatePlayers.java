@@ -19,7 +19,7 @@ public class CreatePlayers extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_players);
-
+        //test comment
         final EditText playerName = (EditText)findViewById(R.id.playerName);
         Button add = (Button)findViewById(R.id.addPlayer);
         final ListView players = (ListView)findViewById(R.id.players);
