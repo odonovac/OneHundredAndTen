@@ -32,15 +32,18 @@
         android:layout_alignTop="@+id/addPlayer"
         android:layout_toRightOf="@+id/addPlayer"
         android:layout_toEndOf="@+id/addPlayer"
-        android:layout_above="@+id/players" />
+        android:layout_above="@android:id/list" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/players"
+        android:id="@android:id/list"
         android:headerDividersEnabled="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
-        android:layout_below="@+id/addPlayer" />
+        android:layout_below="@+id/addPlayer"
+        android:divider="#FFCC00"
+        android:dividerHeight="2dp"
+        android:layout_weight="1"/>
 
 </RelativeLayout>

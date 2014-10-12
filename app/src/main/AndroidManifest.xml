@@ -21,6 +21,11 @@
             android:parentActivityName=".MainActivity" >
 
         </activity>
+        <activity android:name=".KeepScores"
+            android:label="KeepScores"
+            android:parentActivityName=".CreatePlayers" >
+
+        </activity>
     </application>
 
 </manifest>
