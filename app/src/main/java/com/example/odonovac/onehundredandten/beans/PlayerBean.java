@@ -11,6 +11,7 @@ public class PlayerBean implements Parcelable{
     private String playerName;
     private int playerScore;
     private boolean dealer = false;
+    private int bid;
 
     public PlayerBean(String name, int score){
         this.playerName = name;
@@ -28,9 +29,16 @@ public class PlayerBean implements Parcelable{
     public int getPlayerScore(){
         return this.playerScore;
     }
+    public int getBid(){
+        return this.bid;
+    }
 
     public void setPlayerScore(int score) {
         this.playerScore = score;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
     }
 
     public boolean isDealer(){
@@ -44,8 +52,13 @@ public class PlayerBean implements Parcelable{
     public void toggleDealer() {
         this.dealer = !this.dealer;
     }
+
     public String getPlayerScoreText(){
         return String.valueOf(this.playerScore);
+    }
+
+    public String getBidText(){
+        return String.valueOf(this.bid);
     }
 
     public void addTrick(){

@@ -19,11 +19,14 @@
         <activity android:name=".CreatePlayers"
             android:label="CreatePlayers"
             android:parentActivityName=".MainActivity" >
-
+        </activity>
+        <activity android:name=".EnterBid"
+            android:label="EnterBid"
+            android:parentActivityName=".CreatePlayers" >
         </activity>
         <activity android:name=".KeepScores"
             android:label="KeepScores"
-            android:parentActivityName=".CreatePlayers" >
+            android:parentActivityName=".EnterBid" >
 
         </activity>
     </application>
