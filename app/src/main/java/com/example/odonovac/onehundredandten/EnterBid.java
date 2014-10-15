@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
 
@@ -27,6 +28,7 @@ public class EnterBid extends Activity {
         final ArrayList<PlayerBean> listPlayers = getIntent().getParcelableArrayListExtra("players");
         final NumberPicker bidNumberPicker = (NumberPicker)findViewById(R.id.bidNumberPicker);
         final RadioButton[] rb = new RadioButton[listPlayers.size()];
+
         for(int i=0; i<rb.length; i++){
             rb[i]  = new RadioButton(this);
             rb[i].setText(listPlayers.get(i).getPlayerName());
@@ -48,11 +50,17 @@ public class EnterBid extends Activity {
             @Override
             public void onClick(View view) {
                 int selected = playersRG.getCheckedRadioButtonId();
-                listPlayers.get(selected).setBidder(true);
-                listPlayers.get(selected).setBid(bidNumberPicker.getValue());
-                Intent intent = new Intent(getApplicationContext(), KeepScores.class);
-                intent.putParcelableArrayListExtra("players", listPlayers);
-                startActivity(intent);
+                if (selected<0) {
+                    Toast.makeText(getApplicationContext(),
+                            "Select the bidder to continue", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    listPlayers.get(selected).setBidder(true);
+                    listPlayers.get(selected).setBid(bidNumberPicker.getValue());
+                    Intent intent = new Intent(getApplicationContext(), KeepScores.class);
+                    intent.putParcelableArrayListExtra("players", listPlayers);
+                    startActivity(intent);
+                }
             }
         });
 
