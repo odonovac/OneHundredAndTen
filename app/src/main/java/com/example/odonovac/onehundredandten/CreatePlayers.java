@@ -75,7 +75,7 @@ public class CreatePlayers extends ListActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), KeepScores.class);
+                Intent intent = new Intent(getApplicationContext(), EnterBid.class);
                 intent.putParcelableArrayListExtra("players", listPlayers);
                 startActivity(intent);
             }

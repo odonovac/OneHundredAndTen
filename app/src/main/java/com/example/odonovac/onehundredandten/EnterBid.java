@@ -1,14 +1,14 @@
 package com.example.odonovac.onehundredandten;
 
-import android.app.ListActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.Toast;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-import com.example.odonovac.onehundredandten.adapters.EnterBidAdapter;
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
 
 import java.util.ArrayList;
@@ -16,22 +16,25 @@ import java.util.ArrayList;
 /**
  * Created by odonovac on 08/10/2014.
  */
-public class EnterBid extends ListActivity {
+public class EnterBid extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_bid);
         String[] stringArray = new String[6];
-        final ListView players = (ListView)findViewById(android.R.id.list);
-        final NumberPicker playerBid = (NumberPicker) findViewById(R.id.numberPickerBid);
-        ArrayList<PlayerBean> playerNames = getIntent().getParcelableArrayListExtra("players");
+        final RadioGroup players = (RadioGroup)findViewById(R.id.bidRadioGroup);
+        final Button nextBtn  = (Button) findViewById(R.id.bidNextBtn);
+        final ArrayList<PlayerBean> listPlayers = getIntent().getParcelableArrayListExtra("players");
         NumberPicker numberPickerBid = (NumberPicker)findViewById(R.id.numberPickerBid);
-        final EnterBidAdapter bidAdapter = new EnterBidAdapter(getApplicationContext(), playerNames);
+    
+        final RadioButton[] rb = new RadioButton[listPlayers.size()];
+        for(int i=0; i<rb.length; i++){
+            rb[i]  = new RadioButton(this);
+            rb[i].setText(listPlayers.get(i).getPlayerName());
+            rb[i].setId(i);
+            players.addView(rb[i]);
+        }
 
-        players.setAdapter(bidAdapter);
-
-        //setListAdapter(bidAdapter);
-        players.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         int n=0;
         for(int i=0; i<6; i++){
             stringArray[i] = Integer.toString(n);
@@ -42,27 +45,15 @@ public class EnterBid extends ListActivity {
         numberPickerBid.setDisplayedValues(stringArray);
         numberPickerBid.setWrapSelectorWheel(true);
 
-        numberPickerBid.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                //players.get(position).setBid(newVal);
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), EnterBid.class);
+                intent.putParcelableArrayListExtra("players", listPlayers);
+                startActivity(intent);
             }
         });
+
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this,
-                String.valueOf(getListView().getCheckedItemCount()),
-                Toast.LENGTH_LONG).show();
-        return true;
-    }
-
-
 }
