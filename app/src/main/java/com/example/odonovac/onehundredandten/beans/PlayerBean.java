@@ -12,6 +12,7 @@ public class PlayerBean implements Parcelable{
     private int playerScore;
     private boolean dealer = false;
     private int bid;
+    private boolean bidder = false;
 
     public PlayerBean(String name, int score){
         this.playerName = name;
@@ -51,6 +52,18 @@ public class PlayerBean implements Parcelable{
 
     public void toggleDealer() {
         this.dealer = !this.dealer;
+    }
+
+    public boolean isBidder(){
+        return this.bidder;
+    }
+
+    public void setBidder(boolean dealer) {
+        this.bidder = bidder;
+    }
+
+    public void toggleBidder() {
+        this.bidder = !this.bidder;
     }
 
     public String getPlayerScoreText(){

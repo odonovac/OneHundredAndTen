@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
     <NumberPicker
-        android:id="@+id/numberPicker"
+        android:id="@+id/bidNumberPicker"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
