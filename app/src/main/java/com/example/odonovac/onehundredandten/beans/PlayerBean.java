@@ -9,14 +9,15 @@ import android.os.Parcelable;
 public class PlayerBean implements Parcelable{
 
     private String playerName;
-    private int playerScore;
+    private int playerRoundScore;
+    private int playerTotalScore;
     private boolean dealer = false;
     private int bid;
     private boolean bidder = false;
 
     public PlayerBean(String name, int score){
         this.playerName = name;
-        this.playerScore = score;
+        this.playerRoundScore = score;
     }
 
     public String getPlayerName() {
@@ -27,15 +28,21 @@ public class PlayerBean implements Parcelable{
         this.playerName = name;
     }
 
-    public int getPlayerScore(){
-        return this.playerScore;
+    public int getPlayerRoundScore(){
+        return this.playerRoundScore;
+    }
+    public int getPlayerTotalScore(){
+        return this.playerTotalScore;
     }
     public int getBid(){
         return this.bid;
     }
 
-    public void setPlayerScore(int score) {
-        this.playerScore = score;
+    public void setPlayerRoundScore(int score) {
+        this.playerRoundScore = score;
+    }
+    public void setPlayerTotalScore(int score) {
+        this.playerTotalScore = score;
     }
 
     public void setBid(int bid) {
@@ -58,7 +65,7 @@ public class PlayerBean implements Parcelable{
         return this.bidder;
     }
 
-    public void setBidder(boolean dealer) {
+    public void setBidder(boolean bidder) {
         this.bidder = bidder;
     }
 
@@ -67,7 +74,7 @@ public class PlayerBean implements Parcelable{
     }
 
     public String getPlayerScoreText(){
-        return String.valueOf(this.playerScore);
+        return String.valueOf(this.playerRoundScore);
     }
 
     public String getBidText(){
@@ -75,12 +82,25 @@ public class PlayerBean implements Parcelable{
     }
 
     public void addTrick(){
-        this.playerScore += 5;
+        this.playerRoundScore += 5;
     }
 
     public void minusTrick(){
-        this.playerScore -= 5;
+        this.playerRoundScore -= 5;
     }
+
+    public void updateScore() {
+        if(isBidder())
+        {
+           if(playerRoundScore >= bid)
+               playerTotalScore += playerRoundScore;
+            else
+               playerTotalScore -= bid;
+        }
+        else
+            playerTotalScore += playerRoundScore;
+    }
+
 
     @Override
     public int describeContents() {
@@ -90,12 +110,18 @@ public class PlayerBean implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(playerName);
-        parcel.writeInt(playerScore);
+        parcel.writeInt(playerRoundScore);
+        parcel.writeBooleanArray(new boolean[]{bidder, dealer});
     }
 
     private PlayerBean(Parcel in) {
         playerName = in.readString();
-        playerScore = in.readInt();
+        playerRoundScore = in.readInt();
+        boolean[] boolArray = new boolean[2];
+        in.readBooleanArray(boolArray);
+        bidder = boolArray[0];
+        dealer = boolArray[1];
+
     }
 
     public static final Parcelable.Creator<PlayerBean> CREATOR

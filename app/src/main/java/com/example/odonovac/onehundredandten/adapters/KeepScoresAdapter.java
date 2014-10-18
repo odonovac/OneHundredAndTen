@@ -1,13 +1,13 @@
 package com.example.odonovac.onehundredandten.adapters;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.odonovac.onehundredandten.KeepScores;
@@ -39,10 +39,14 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         TextView textPlayerName = (TextView) rowView.findViewById(R.id.playerName);
         TextView textPlayerScore = (TextView) rowView.findViewById(R.id.playerScore);
 
+        ImageView imgBidder = (ImageView)rowView.findViewById(R.id.imgBidder);
+
         Button addTrickBtn = (Button) rowView.findViewById(R.id.addTrick);
         Button minusTrickBtn = (Button) rowView.findViewById(R.id.minusTrick);
         textPlayerName.setText(players.get(position).getPlayerName());
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
+        if(!players.get(position).isBidder())
+            imgBidder.setVisibility(View.INVISIBLE);
 
         addTrickBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +64,7 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         minusTrickBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(players.get(position).getPlayerScore() != 0) {
+                if(players.get(position).getPlayerRoundScore() != 0) {
                     players.get(position).minusTrick();
                     notifyDataSetChanged();
                     KeepScores.scoreRunningTotal-=5;

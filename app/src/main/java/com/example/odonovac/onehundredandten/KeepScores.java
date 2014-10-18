@@ -44,6 +44,13 @@ public class KeepScores extends ListActivity {
             public void onClick(View view) {
 
                 if((MAX_ROUND_SCORE == scoreRunningTotal)) {
+                    //run game logic to refresh scores
+                    for(PlayerBean player : playerNames){
+                        player.updateScore();
+                        player.setBidder(false);
+                        player.setPlayerRoundScore(0);
+                    }
+                    //redirect player to summary screen
                     Intent intent = new Intent(getApplicationContext(), EnterBid.class);
                     intent.putParcelableArrayListExtra("players", playerNames);
                     startActivity(intent);
