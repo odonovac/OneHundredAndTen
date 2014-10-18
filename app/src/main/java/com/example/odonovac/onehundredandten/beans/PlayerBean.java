@@ -46,7 +46,7 @@ public class PlayerBean implements Parcelable{
     }
 
     public void setBid(int bid) {
-        this.bid = bid;
+        this.bid = bid*5;
     }
 
     public boolean isDealer(){
@@ -93,16 +93,26 @@ public class PlayerBean implements Parcelable{
         this.playerRoundScore -= 5;
     }
 
-    public void updateScore() {
+    public boolean updateScore() {
+        boolean gameOver = false;
+
         if(isBidder())
         {
-           if(playerRoundScore >= bid)
+           if(playerRoundScore >= bid) {
                playerTotalScore += playerRoundScore;
+               if(playerTotalScore >= 110)
+                   gameOver=true;
+           }
             else
                playerTotalScore -= bid;
         }
-        else
+        else {
             playerTotalScore += playerRoundScore;
+            if(playerTotalScore > 110)
+                playerTotalScore = 110;
+        }
+
+        return gameOver;
     }
 
 

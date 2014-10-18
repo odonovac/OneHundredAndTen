@@ -37,14 +37,14 @@ public class EnterBid extends Activity {
         }
 
         int n=0;
-        for(int i=0; i<6; i++){
+        for(int i=0; i<=6; i++){
             stringArray[i] = Integer.toString(n);
             n+=5;
         }
         bidNumberPicker.setMaxValue(5);
         bidNumberPicker.setMinValue(0);
         bidNumberPicker.setDisplayedValues(stringArray);
-        bidNumberPicker.setWrapSelectorWheel(true);
+        bidNumberPicker.setWrapSelectorWheel(false);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
