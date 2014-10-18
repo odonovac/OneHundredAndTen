@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         Button startButton = (Button)findViewById(R.id.startGameButton);
-        Button contButton = (Button)findViewById(R.id.contGameButton);
+        Button contButton = (Button)findViewById(R.id.teamsGameButton);
 
 
         startButton.setOnClickListener(new View.OnClickListener() {

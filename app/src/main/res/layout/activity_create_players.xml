@@ -1,6 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:columnCount="1"
+    android:rowCount="5"
+    tools:context=".MainActivity"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="horizontal">
 
     <EditText
         android:layout_width="match_parent"
@@ -8,42 +16,41 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/playerName"
-        android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:hint="Enter Name" />
+        android:hint="@string/hintCreatePlayersTextBox"
+        android:layout_row="0"
+        android:layout_column="0"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/addCreatePlayersBtn"
         android:id="@+id/addPlayer"
-        android:layout_below="@+id/playerName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_gravity="left" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
+        android:text="@string/nextStepCreatePlayerBtn"
         android:id="@+id/doneButton"
-        android:layout_alignTop="@+id/addPlayer"
-        android:layout_toRightOf="@+id/addPlayer"
-        android:layout_toEndOf="@+id/addPlayer"
-        android:layout_above="@android:id/list" />
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="150dp" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@android:id/list"
         android:headerDividersEnabled="true"
-        android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
-        android:layout_below="@+id/addPlayer"
         android:divider="#FFCC00"
         android:dividerHeight="2dp"
-        android:layout_weight="1"/>
+        android:layout_row="2"
+        android:layout_column="0"/>
 
-</RelativeLayout>
+</GridLayout>
