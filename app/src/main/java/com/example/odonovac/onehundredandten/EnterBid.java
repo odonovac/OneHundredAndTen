@@ -22,7 +22,7 @@ public class EnterBid extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_bid);
-        String[] stringArray = new String[6];
+        String[] stringArray = new String[7];
         final RadioGroup playersRG = (RadioGroup)findViewById(R.id.bidRadioGroup);
         final Button nextBtn  = (Button) findViewById(R.id.bidNextBtn);
         final ArrayList<PlayerBean> listPlayers = getIntent().getParcelableArrayListExtra("players");
