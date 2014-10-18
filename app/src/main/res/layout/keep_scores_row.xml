@@ -12,6 +12,24 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/chip2"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/imgDealer"
+        android:src="@drawable/dealer_selected"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imgBidder"
+        android:layout_toEndOf="@+id/imgBidder" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/playerTotalScore"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_toStartOf="@+id/playerName"
+        android:layout_toLeftOf="@+id/playerName" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -19,18 +37,11 @@
         android:layout_marginLeft="0dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:layout_toStartOf="@+id/playerScore"
-        android:layout_toLeftOf="@+id/playerScore"
+        android:layout_toStartOf="@+id/addTrick"
+        android:layout_toLeftOf="@+id/addTrick"
         android:autoText="false" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/playerScore"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_toStartOf="@+id/addTrick"
-        android:layout_toLeftOf="@+id/addTrick" />
+
 
     <Button
         android:layout_width="wrap_content"
@@ -38,8 +49,17 @@
         android:id="@+id/addTrick"
         android:text="+"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/minusTrick"
-        android:layout_toStartOf="@+id/minusTrick" />
+        android:layout_toLeftOf="@+id/playerScore"
+        android:layout_toStartOf="@+id/playerScore" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/playerScore"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_toStartOf="@+id/minusTrick"
+        android:layout_toLeftOf="@+id/minusTrick" />
 
     <Button
         android:layout_width="wrap_content"

@@ -77,6 +77,10 @@ public class PlayerBean implements Parcelable{
         return String.valueOf(this.playerRoundScore);
     }
 
+    public String getPlayerTotalScoreText(){
+        return String.valueOf(this.playerTotalScore);
+    }
+
     public String getBidText(){
         return String.valueOf(this.bid);
     }
@@ -111,17 +115,20 @@ public class PlayerBean implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(playerName);
         parcel.writeInt(playerRoundScore);
+        parcel.writeInt(playerTotalScore);
+        parcel.writeInt(bid);
         parcel.writeBooleanArray(new boolean[]{bidder, dealer});
     }
 
     private PlayerBean(Parcel in) {
         playerName = in.readString();
         playerRoundScore = in.readInt();
+        playerTotalScore = in.readInt();
+        bid = in.readInt();
         boolean[] boolArray = new boolean[2];
         in.readBooleanArray(boolArray);
         bidder = boolArray[0];
         dealer = boolArray[1];
-
     }
 
     public static final Parcelable.Creator<PlayerBean> CREATOR

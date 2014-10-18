@@ -38,15 +38,22 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         View rowView = inflater.inflate(R.layout.keep_scores_row, parent, false);
         TextView textPlayerName = (TextView) rowView.findViewById(R.id.playerName);
         TextView textPlayerScore = (TextView) rowView.findViewById(R.id.playerScore);
+        TextView textPlayerTotalScore = (TextView)rowView.findViewById(R.id.playerTotalScore);
 
         ImageView imgBidder = (ImageView)rowView.findViewById(R.id.imgBidder);
+        ImageView imgDealer = (ImageView)rowView.findViewById(R.id.imgDealer);
 
         Button addTrickBtn = (Button) rowView.findViewById(R.id.addTrick);
         Button minusTrickBtn = (Button) rowView.findViewById(R.id.minusTrick);
         textPlayerName.setText(players.get(position).getPlayerName());
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
+        textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+
         if(!players.get(position).isBidder())
             imgBidder.setVisibility(View.INVISIBLE);
+
+        if(!players.get(position).isDealer())
+            imgDealer.setVisibility(View.INVISIBLE);
 
         addTrickBtn.setOnClickListener(new View.OnClickListener() {
             @Override

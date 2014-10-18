@@ -45,11 +45,23 @@ public class KeepScores extends ListActivity {
 
                 if((MAX_ROUND_SCORE == scoreRunningTotal)) {
                     //run game logic to refresh scores
+                    boolean setDealer = false;
                     for(PlayerBean player : playerNames){
                         player.updateScore();
                         player.setBidder(false);
                         player.setPlayerRoundScore(0);
+                        if(setDealer) {
+                            player.setDealer(true);
+                            setDealer = false;
+                        }
+                        else if(player.isDealer()) {
+                            setDealer = true;
+                            player.setDealer(false);
+                        }
                     }
+                    if(setDealer)
+                        playerNames.get(0).setDealer(true);
+                    scoreRunningTotal = 0;
                     //redirect player to summary screen
                     Intent intent = new Intent(getApplicationContext(), EnterBid.class);
                     intent.putParcelableArrayListExtra("players", playerNames);
