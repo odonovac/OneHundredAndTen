@@ -1,73 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight">
-
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="8"
+    android:rowCount="1"
+    tools:context=".MainActivity"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="horizontal"
+    android:useDefaultMargins="true">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/imgBidder"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/chip2"/>
+        android:src="@drawable/chip2"
+        android:layout_row="0"
+        android:layout_column="0"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/imgDealer"
         android:src="@drawable/dealer_selected"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imgBidder"
-        android:layout_toEndOf="@+id/imgBidder" />
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/playerTotalScore"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_toStartOf="@+id/playerName"
-        android:layout_toLeftOf="@+id/playerName" />
+        android:layout_row="0"
+        android:layout_column="2"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="fill_horizontal"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/playerName"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_toStartOf="@+id/addTrick"
-        android:layout_toLeftOf="@+id/addTrick"
-        android:autoText="false" />
+        android:layout_marginLeft="10dp"
+        android:autoText="false"
+        android:layout_row="0"
+        android:layout_column="3"
+        android:text="0"
+        android:layout_gravity="fill_horizontal"        />
 
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/addTrick"
-        android:text="+"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/playerScore"
-        android:layout_toStartOf="@+id/playerScore" />
-
+    <ImageButton
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:id="@+id/imageButtonPlus"
+        android:layout_row="0"
+        android:layout_column="4"
+        android:src="@drawable/plus"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="20dp"
+        android:clickable="false"
+        android:layout_gravity="right" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/playerScore"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:layout_toStartOf="@+id/minusTrick"
-        android:layout_toLeftOf="@+id/minusTrick" />
+        android:layout_row="0"
+        android:layout_column="5"
+        android:text="0"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="fill_horizontal"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/minusTrick"
-        android:text="-"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <ImageButton
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:id="@+id/imageButtonMinus"
+        android:layout_row="0"
+        android:layout_column="6"
+        android:src="@drawable/minus"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="right" />
 
-</RelativeLayout>
+</GridLayout>

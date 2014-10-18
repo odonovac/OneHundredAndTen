@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,8 +44,8 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         ImageView imgBidder = (ImageView)rowView.findViewById(R.id.imgBidder);
         ImageView imgDealer = (ImageView)rowView.findViewById(R.id.imgDealer);
 
-        Button addTrickBtn = (Button) rowView.findViewById(R.id.addTrick);
-        Button minusTrickBtn = (Button) rowView.findViewById(R.id.minusTrick);
+        ImageButton addTrickImgBtn = (ImageButton) rowView.findViewById(R.id.imageButtonPlus);
+        ImageButton minusTrickImgBtn = (ImageButton) rowView.findViewById(R.id.imageButtonMinus);
         textPlayerName.setText(players.get(position).getPlayerName());
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
         textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
@@ -55,7 +56,7 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         if(!players.get(position).isDealer())
             imgDealer.setVisibility(View.INVISIBLE);
 
-        addTrickBtn.setOnClickListener(new View.OnClickListener() {
+        addTrickImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(KeepScores.scoreRunningTotal < KeepScores.MAX_ROUND_SCORE) {
@@ -68,7 +69,7 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
             }
         });
 
-        minusTrickBtn.setOnClickListener(new View.OnClickListener() {
+        minusTrickImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(players.get(position).getPlayerRoundScore() != 0) {
