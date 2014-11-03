@@ -13,4 +13,5 @@
     <string name="nextStepCreatePlayerBtn">Next  step</string>
     <string name="addCreatePlayersBtn">Add</string>
     <string name="hintCreatePlayersTextBox">Name...</string>
+    <string name="keepScoresDoneBtn">Continue</string>
 </resources>
