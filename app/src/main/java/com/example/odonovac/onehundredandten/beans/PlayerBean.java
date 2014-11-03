@@ -14,10 +14,14 @@ public class PlayerBean implements Parcelable{
     private boolean dealer = false;
     private int bid;
     private boolean bidder = false;
+    private int teamID;
+    private boolean team = false;
 
-    public PlayerBean(String name, int score){
+    public PlayerBean(String name, int score, boolean team,  int teamID){
         this.playerName = name;
         this.playerRoundScore = score;
+        this.team = team;
+        this.teamID = teamID;
     }
 
     public String getPlayerName() {
@@ -37,7 +41,9 @@ public class PlayerBean implements Parcelable{
     public int getBid(){
         return this.bid;
     }
-
+    public int getTeamID(){
+        return this.teamID;
+    }
     public void setPlayerRoundScore(int score) {
         this.playerRoundScore = score;
     }
@@ -48,7 +54,9 @@ public class PlayerBean implements Parcelable{
     public void setBid(int bid) {
         this.bid = bid*5;
     }
-
+    public void setTeamID(int teamID) {
+        this.teamID = teamID;
+    }
     public boolean isDealer(){
         return this.dealer;
     }
@@ -64,15 +72,22 @@ public class PlayerBean implements Parcelable{
     public boolean isBidder(){
         return this.bidder;
     }
+    public boolean isTeam(){
+        return this.team;
+    }
 
     public void setBidder(boolean bidder) {
         this.bidder = bidder;
     }
-
+    public void setTeam(boolean team) {
+        this.team = team;
+    }
     public void toggleBidder() {
         this.bidder = !this.bidder;
     }
-
+    public void toggleTeam() {
+        this.team = !this.team;
+    }
     public String getPlayerScoreText(){
         return String.valueOf(this.playerRoundScore);
     }
@@ -127,7 +142,8 @@ public class PlayerBean implements Parcelable{
         parcel.writeInt(playerRoundScore);
         parcel.writeInt(playerTotalScore);
         parcel.writeInt(bid);
-        parcel.writeBooleanArray(new boolean[]{bidder, dealer});
+        parcel.writeInt(teamID);
+        parcel.writeBooleanArray(new boolean[]{bidder, dealer,team});
     }
 
     private PlayerBean(Parcel in) {
@@ -135,10 +151,12 @@ public class PlayerBean implements Parcelable{
         playerRoundScore = in.readInt();
         playerTotalScore = in.readInt();
         bid = in.readInt();
+        teamID = in.readInt();
         boolean[] boolArray = new boolean[2];
         in.readBooleanArray(boolArray);
         bidder = boolArray[0];
         dealer = boolArray[1];
+        team = boolArray[2];
     }
 
     public static final Parcelable.Creator<PlayerBean> CREATOR

@@ -31,6 +31,9 @@ public class CreatePlayers extends ListActivity {
         add.setEnabled(false);
         done.setEnabled(false);
 
+        Bundle extras = getIntent().getExtras();
+        final String gameMode= extras.getString("gameMode");
+
         final ListView players = (ListView) findViewById(android.R.id.list);
 
         final ArrayList<PlayerBean> listPlayers = new ArrayList<PlayerBean>();
@@ -60,8 +63,9 @@ public class CreatePlayers extends ListActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listPlayers.add(new PlayerBean(playerName.getText().toString(), 0));
-                playerName.setText("");
+                int teamID = getNextTeamID(listPlayers.size(), gameMode);
+                listPlayers.add(new PlayerBean(playerName.getText().toString(), 0, true, teamID));
+                playerName.setText((String.valueOf(teamID)));
                 view.setEnabled(false);
                 if ((listPlayers.size() > 1) && dealerEnabled(listPlayers))
                     done.setEnabled(true);
@@ -92,4 +96,25 @@ public class CreatePlayers extends ListActivity {
         return false;
     }
 
+    private int getNextTeamID(int listPlayersSize, String gameMode) {
+        int nextTeamID = 0;
+        if (listPlayersSize >= 1)
+        {
+            if (gameMode.equals("SINGLE")) {
+                nextTeamID = listPlayersSize;
+            }
+            else if ((gameMode.equals("TEAM")) && ((listPlayersSize == 1)||(listPlayersSize == 4))){
+                nextTeamID = 1;
+            }
+            else if ((listPlayersSize == 2) || (listPlayersSize == 5)){
+                nextTeamID = 2;
+            }
+            else if (listPlayersSize == 3){
+                nextTeamID = 0;
+            }
+        }
+        return nextTeamID;
+    }
+
 }
+
