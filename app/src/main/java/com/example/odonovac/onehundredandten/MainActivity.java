@@ -18,13 +18,24 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         Button startButton = (Button)findViewById(R.id.startGameButton);
-        Button contButton = (Button)findViewById(R.id.teamsGameButton);
+        Button teamsButton = (Button)findViewById(R.id.teamsGameButton);
 
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CreatePlayers.class));
+                Intent intent = new Intent(getApplicationContext(), CreatePlayers.class);
+                intent.putExtra("gameMode", "SINGLE");
+                startActivity(intent);
+            }
+        });
+
+        teamsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreatePlayers.class);
+                intent.putExtra("gameMode", "TEAM");
+                startActivity(intent);
             }
         });
     }

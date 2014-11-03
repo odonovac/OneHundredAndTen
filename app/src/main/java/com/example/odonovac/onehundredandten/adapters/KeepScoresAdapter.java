@@ -2,6 +2,8 @@ package com.example.odonovac.onehundredandten.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +52,20 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
         textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
 
+
+
+
         if(!players.get(position).isBidder())
             imgBidder.setVisibility(View.INVISIBLE);
+        else
+        {
+            Bitmap bmp= BitmapFactory.decodeResource(context.getResources(), R.drawable.chips_all);
+            int width=150;
+            int height=bmp.getHeight();
+
+            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((players.get(position).getBid()/5)*150),0, width, height);
+            imgBidder.setImageBitmap(resizedBitmap);
+        }
 
         if(!players.get(position).isDealer())
             imgDealer.setVisibility(View.INVISIBLE);

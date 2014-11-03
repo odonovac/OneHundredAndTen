@@ -29,6 +29,11 @@
             android:parentActivityName=".EnterBid" >
 
         </activity>
+        <activity android:name=".GameOver"
+            android:label="GameOver"
+            android:parentActivityName=".KeepScores" >
+
+        </activity>
     </application>
 
 </manifest>
