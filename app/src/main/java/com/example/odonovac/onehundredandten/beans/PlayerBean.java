@@ -152,7 +152,7 @@ public class PlayerBean implements Parcelable{
         playerTotalScore = in.readInt();
         bid = in.readInt();
         teamID = in.readInt();
-        boolean[] boolArray = new boolean[2];
+        boolean[] boolArray = new boolean[3];
         in.readBooleanArray(boolArray);
         bidder = boolArray[0];
         dealer = boolArray[1];
