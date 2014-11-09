@@ -35,7 +35,7 @@ public class CreatePlayerAdapter extends ArrayAdapter<PlayerBean> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.create_players_row, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.playerName);
+        TextView textView = (TextView) rowView.findViewById(R.id.playerNameRow);
         ImageButton deleteBtn = (ImageButton) rowView.findViewById(R.id.deleteBtn);
         ImageButton dealerBtn = (ImageButton) rowView.findViewById(R.id.dealerBtn);
         textView.setText(players.get(position).getPlayerName());

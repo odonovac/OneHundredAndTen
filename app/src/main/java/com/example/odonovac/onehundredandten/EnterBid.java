@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
+import com.example.odonovac.onehundredandten.beans.TeamBean;
 
 import java.util.ArrayList;
 
@@ -25,9 +26,12 @@ public class EnterBid extends Activity {
         String[] stringArray = new String[7];
         final RadioGroup playersRG = (RadioGroup)findViewById(R.id.bidRadioGroup);
         final Button nextBtn  = (Button) findViewById(R.id.bidNextBtn);
-        final ArrayList<PlayerBean> listPlayers = getIntent().getParcelableArrayListExtra("players");
+        final ArrayList<PlayerBean> listPlayers = ((MyApplication)getApplication()).getPlayers();//getIntent().getParcelableArrayListExtra("players");
+        final ArrayList<TeamBean> listTeams = getIntent().getParcelableArrayListExtra("teams");
         final NumberPicker bidNumberPicker = (NumberPicker)findViewById(R.id.bidNumberPicker);
         final RadioButton[] rb = new RadioButton[listPlayers.size()];
+        Bundle extras = getIntent().getExtras();
+        final String gameMode= extras.getString("gameMode");
 
         for(int i=0; i<rb.length; i++){
             rb[i]  = new RadioButton(this);
@@ -58,7 +62,9 @@ public class EnterBid extends Activity {
                     listPlayers.get(selected).setBidder(true);
                     listPlayers.get(selected).setBid(bidNumberPicker.getValue());
                     Intent intent = new Intent(getApplicationContext(), KeepScores.class);
-                    intent.putParcelableArrayListExtra("players", listPlayers);
+                    intent.putExtra("gameMode", gameMode);
+                    //intent.putParcelableArrayListExtra("players", listPlayers);
+                    intent.putParcelableArrayListExtra("teams", listTeams);
                     startActivity(intent);
                 }
             }

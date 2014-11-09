@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.example.odonovac.onehundredandten.adapters.CreatePlayerAdapter;
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
+import com.example.odonovac.onehundredandten.beans.TeamBean;
 
 import java.util.ArrayList;
 
@@ -36,8 +37,8 @@ public class CreatePlayers extends ListActivity {
 
         final ListView players = (ListView) findViewById(android.R.id.list);
 
-        final ArrayList<PlayerBean> listPlayers = new ArrayList<PlayerBean>();
-
+        final ArrayList<PlayerBean> listPlayers = ((MyApplication)getApplication()).getPlayers();//new ArrayList<PlayerBean>();
+        final ArrayList<TeamBean> listTeams = new ArrayList<TeamBean>();
         final CreatePlayerAdapter playerAdapter = new CreatePlayerAdapter(getApplicationContext(), listPlayers, this);
 
         players.setAdapter(playerAdapter);
@@ -80,7 +81,9 @@ public class CreatePlayers extends ListActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), EnterBid.class);
-                intent.putParcelableArrayListExtra("players", listPlayers);
+                intent.putExtra("gameMode", gameMode);
+                //intent.putParcelableArrayListExtra("players", listPlayers);
+                intent.putParcelableArrayListExtra("teams", listTeams);
                 startActivity(intent);
             }
         });
