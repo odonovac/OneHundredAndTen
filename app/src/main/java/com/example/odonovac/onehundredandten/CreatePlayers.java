@@ -65,7 +65,7 @@ public class CreatePlayers extends ListActivity {
             public void onClick(View view) {
                 int teamID = getNextTeamID(listPlayers.size(), gameMode);
                 listPlayers.add(new PlayerBean(playerName.getText().toString(), 0, true, teamID));
-               
+                playerName.setText((String.valueOf(teamID)));
                 view.setEnabled(false);
                 if ((listPlayers.size() > 1) && dealerEnabled(listPlayers))
                     done.setEnabled(true);
