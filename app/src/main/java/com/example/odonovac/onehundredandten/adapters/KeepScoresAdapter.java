@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.odonovac.onehundredandten.KeepScores;
+import com.example.odonovac.onehundredandten.MyApplication;
 import com.example.odonovac.onehundredandten.R;
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
+import com.example.odonovac.onehundredandten.beans.TeamBean;
 
 import java.util.ArrayList;
 
@@ -25,13 +27,15 @@ import java.util.ArrayList;
  */
 public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
     private final Context context;
-    private final ArrayList<PlayerBean> players;
+    //private final ArrayList<PlayerBean> players;
+    final ArrayList<PlayerBean> players = ((MyApplication)getApplication()).getPlayers();
     private final Activity activity;
+    final ArrayList<TeamBean> teams = ((MyApplication)getApplication()).getTeams();
 
-    public KeepScoresAdapter(Context context, ArrayList<PlayerBean>  values, Activity activity) {
-        super(context, R.layout.keep_scores_row, values);
+    public KeepScoresAdapter(Context context, Activity activity) {
+        super(context, R.layout.keep_scores_row);
         this.context = context;
-        this.players = values;
+        //this.players = values;
         this.activity = activity;
     }
 
@@ -51,7 +55,13 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         ImageButton minusTrickImgBtn = (ImageButton) rowView.findViewById(R.id.imageButtonMinus);
         textPlayerName.setText(players.get(position).getPlayerName());
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
-        textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+        if(((MyApplication)getApplication()).getGameMode() == MyApplication.SINGLE) {
+            textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+        }
+        else
+        {
+            textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID()).getTeamTotalScoreText());
+        }
 
         switch(players.get(position).getTeamID()){
             case 0:
