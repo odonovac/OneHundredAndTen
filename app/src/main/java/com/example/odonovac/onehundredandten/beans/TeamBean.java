@@ -18,6 +18,7 @@ public class TeamBean implements Parcelable{
 
     public TeamBean(){
         super();
+        this.players = new ArrayList<PlayerBean>();
     }
 
     public TeamBean(String name, int teamID, ArrayList<PlayerBean> players){

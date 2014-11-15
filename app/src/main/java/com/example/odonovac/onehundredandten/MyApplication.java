@@ -17,8 +17,8 @@ public class MyApplication extends Application {
 
     private ArrayList<TeamBean> teams;
 
-    private static final int SINGLE = 0;
-    private static final int TEAM = 1;
+    public static final int SINGLE = 0;
+    public static final int TEAM = 1;
 
     private int gameMode;
 
@@ -56,15 +56,15 @@ public class MyApplication extends Application {
 
     public void createTeams(){
         for(PlayerBean player : players){
-            int index = player.getTeamID();
+            int teamId = player.getTeamID();
 
-            if(null == teams.get(index)){
+            if(teams.size() < teamId){
                 TeamBean team = new TeamBean();
                 team.addPlayer(player);
             }
             else
             {
-                TeamBean team = teams.get(index);
+                TeamBean team = teams.get(teamId);
                 team.addPlayer(player);
             }
         }

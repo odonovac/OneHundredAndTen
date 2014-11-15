@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CreatePlayers.class);
-                intent.putExtra("gameMode", "SINGLE");
+                ((MyApplication)getApplication()).setGameMode(MyApplication.SINGLE);
                 startActivity(intent);
             }
         });
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CreatePlayers.class);
-                intent.putExtra("gameMode", "TEAM");
+                ((MyApplication)getApplication()).setGameMode(MyApplication.TEAM);
                 startActivity(intent);
             }
         });

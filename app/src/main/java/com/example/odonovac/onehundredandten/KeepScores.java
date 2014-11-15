@@ -25,15 +25,13 @@ public class KeepScores extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keep_scores);
-        Bundle extras = getIntent().getExtras();
-        final String gameMode= extras.getString("gameMode");
-        final ListView players = (ListView)findViewById(android.R.id.list);
+        final ListView playersLV = (ListView)findViewById(android.R.id.list);
 
-        final ArrayList<PlayerBean> playerNames = ((MyApplication)getApplication()).getPlayers();//getIntent().getParcelableArrayListExtra("players");
-        final ArrayList<TeamBean> listTeams = getIntent().getParcelableArrayListExtra("teams");
-        final KeepScoresAdapter playerAdapter = new KeepScoresAdapter(getApplicationContext(), playerNames, this);
+        final ArrayList<PlayerBean> players = ((MyApplication)getApplication()).getPlayers();//getIntent().getParcelableArrayListExtra("players");
+        final ArrayList<TeamBean> teams = ((MyApplication)getApplication()).getTeams(); //getIntent().getParcelableArrayListExtra("teams");
+        final KeepScoresAdapter playerAdapter = new KeepScoresAdapter(getApplicationContext(), players, this);
 
-        players.setAdapter(playerAdapter);
+        playersLV.setAdapter(playerAdapter);
 
         TextView score = (TextView)findViewById(R.id.availableScores);
 
@@ -50,46 +48,57 @@ public class KeepScores extends ListActivity {
                     boolean setDealer = false;
                     boolean gameOver = false;
 
-                    playerloop:
-                    for(PlayerBean player : playerNames){
-                        if (gameMode=="SINGLE"){
+
+                    if(((MyApplication)getApplication()).getGameMode() == MyApplication.SINGLE) {
+                        playerloop:
+                        for (PlayerBean player : players) {
+
                             //if this returns true, GAME OVER
-                            if(player.updateScore()){
-                                gameOver=true;
+                            if (player.updateScore()) {
+                                gameOver = true;
                                 break playerloop;
                             }
-                        }
-                        else{
-                            TeamBean team = listTeams.get(player.getTeamID());
-                            //if this returns true, GAME OVER
-                            if(team.updateScore()){
-                                gameOver=true;
-                                break playerloop;
+                            player.setBidder(false);
+                            player.setPlayerRoundScore(0);
+                            if (setDealer) {
+                                player.setDealer(true);
+                                setDealer = false;
+                            } else if (player.isDealer()) {
+                                setDealer = true;
+                                player.setDealer(false);
                             }
                         }
-                        player.setBidder(false);
-                        player.setPlayerRoundScore(0);
-                        if(setDealer) {
-                            player.setDealer(true);
-                            setDealer = false;
+                    }
+                    else{
+                        teamloop:
+                        for (TeamBean team : teams) {
+
+                            //if this returns true, GAME OVER
+                            if (team.updateScore()) {
+                                gameOver = true;
+                                break teamloop;
+                            }
                         }
-                        else if(player.isDealer()) {
-                            setDealer = true;
-                            player.setDealer(false);
+                        for (PlayerBean player : players) {
+                            player.setBidder(false);
+                            player.setPlayerRoundScore(0);
+                            if (setDealer) {
+                                player.setDealer(true);
+                                setDealer = false;
+                            } else if (player.isDealer()) {
+                                setDealer = true;
+                                player.setDealer(false);
+                            }
                         }
                     }
 
-
                     if(setDealer)
-                        playerNames.get(0).setDealer(true);
+                        players.get(0).setDealer(true);
                     scoreRunningTotal = 0;
                     //redirect player to summary screen
                     Intent intent;
                     if(!gameOver) {
                         intent = new Intent(getApplicationContext(), EnterBid.class);
-                        intent.putExtra("gameMode", gameMode);
-                        intent.putParcelableArrayListExtra("players", playerNames);
-                        intent.putParcelableArrayListExtra("teams", listTeams);
                     }
                     else {
                         intent = new Intent(getApplicationContext(), GameOver.class);

@@ -32,17 +32,12 @@ public class CreatePlayers extends ListActivity {
         add.setEnabled(false);
         done.setEnabled(false);
 
-        Bundle extras = getIntent().getExtras();
-        final String gameMode= extras.getString("gameMode");
-
         final ListView players = (ListView) findViewById(android.R.id.list);
 
-        final ArrayList<PlayerBean> listPlayers = ((MyApplication)getApplication()).getPlayers();//new ArrayList<PlayerBean>();
-        final ArrayList<TeamBean> listTeams = new ArrayList<TeamBean>();
+        final ArrayList<PlayerBean> listPlayers = ((MyApplication)getApplication()).getPlayers();
         final CreatePlayerAdapter playerAdapter = new CreatePlayerAdapter(getApplicationContext(), listPlayers, this);
 
         players.setAdapter(playerAdapter);
-
 
         playerName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -64,7 +59,7 @@ public class CreatePlayers extends ListActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int teamID = getNextTeamID(listPlayers.size(), gameMode);
+                int teamID = getNextTeamID(listPlayers.size());
                 listPlayers.add(new PlayerBean(playerName.getText().toString(), 0, teamID));
                 playerName.setText("");
                 view.setEnabled(false);
@@ -81,9 +76,8 @@ public class CreatePlayers extends ListActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), EnterBid.class);
-                intent.putExtra("gameMode", gameMode);
-                //intent.putParcelableArrayListExtra("players", listPlayers);
-                intent.putParcelableArrayListExtra("teams", listTeams);
+                if(((MyApplication)getApplication()).getGameMode()==MyApplication.TEAM)
+                    ((MyApplication)getApplication()).createTeams();
                 startActivity(intent);
             }
         });
@@ -99,21 +93,18 @@ public class CreatePlayers extends ListActivity {
         return false;
     }
 
-    private int getNextTeamID(int listPlayersSize, String gameMode) {
-        int nextTeamID = 0;
+    private int getNextTeamID(int listPlayersSize) {
+        int nextTeamID = 1;
         if (listPlayersSize >= 1)
         {
-            if (gameMode.equals("SINGLE")) {
-                nextTeamID = listPlayersSize;
-            }
-            else if ((gameMode.equals("TEAM")) && ((listPlayersSize == 1)||(listPlayersSize == 4))){
-                nextTeamID = 1;
-            }
-            else if ((listPlayersSize == 2) || (listPlayersSize == 5)){
+            if (((listPlayersSize == 1)||(listPlayersSize == 4))){
                 nextTeamID = 2;
             }
+            else if ((listPlayersSize == 2) || (listPlayersSize == 5)){
+                nextTeamID = 3;
+            }
             else if (listPlayersSize == 3){
-                nextTeamID = 0;
+                nextTeamID = 1;
             }
         }
         return nextTeamID;

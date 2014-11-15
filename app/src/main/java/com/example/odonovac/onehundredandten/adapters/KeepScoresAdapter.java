@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +53,17 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
         textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
 
-
-
+        switch(players.get(position).getTeamID()){
+            case 0:
+                rowView.setBackgroundColor(Color.GRAY);
+                break;
+            case 1:
+                rowView.setBackgroundColor(Color.DKGRAY);
+                break;
+            case 2:
+                rowView.setBackgroundColor(Color.LTGRAY);
+                break;
+        }
 
         if(!players.get(position).isBidder())
             imgBidder.setVisibility(View.INVISIBLE);
