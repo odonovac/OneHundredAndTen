@@ -61,10 +61,11 @@ public class MyApplication extends Application {
             if(teams.size() < teamId){
                 TeamBean team = new TeamBean();
                 team.addPlayer(player);
+                teams.add(team);
             }
             else
             {
-                TeamBean team = teams.get(teamId);
+                TeamBean team = teams.get(teamId - 1);
                 team.addPlayer(player);
             }
         }

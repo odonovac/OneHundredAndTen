@@ -29,7 +29,7 @@ public class KeepScores extends ListActivity {
 
         final ArrayList<PlayerBean> players = ((MyApplication)getApplication()).getPlayers();//getIntent().getParcelableArrayListExtra("players");
         final ArrayList<TeamBean> teams = ((MyApplication)getApplication()).getTeams(); //getIntent().getParcelableArrayListExtra("teams");
-        final KeepScoresAdapter playerAdapter = new KeepScoresAdapter(getApplicationContext(), this);
+        final KeepScoresAdapter playerAdapter = new KeepScoresAdapter(getApplicationContext(), this, players);
 
         playersLV.setAdapter(playerAdapter);
 

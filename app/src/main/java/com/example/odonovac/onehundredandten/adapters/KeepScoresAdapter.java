@@ -27,16 +27,16 @@ import java.util.ArrayList;
  */
 public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
     private final Context context;
-    //private final ArrayList<PlayerBean> players;
-    final ArrayList<PlayerBean> players = ((MyApplication)getApplication()).getPlayers();
+    private final ArrayList<PlayerBean> players;
+    private final ArrayList<TeamBean> teams;
     private final Activity activity;
-    final ArrayList<TeamBean> teams = ((MyApplication)getApplication()).getTeams();
 
-    public KeepScoresAdapter(Context context, Activity activity) {
-        super(context, R.layout.keep_scores_row);
+    public KeepScoresAdapter(Context context, Activity activity, ArrayList<PlayerBean> values) {
+        super(context, R.layout.keep_scores_row, values );
         this.context = context;
-        //this.players = values;
+        this.players = values;
         this.activity = activity;
+        this.teams = ((MyApplication)activity.getApplication()).getTeams();
     }
 
     @Override
@@ -55,12 +55,12 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         ImageButton minusTrickImgBtn = (ImageButton) rowView.findViewById(R.id.imageButtonMinus);
         textPlayerName.setText(players.get(position).getPlayerName());
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
-        if(((MyApplication)getApplication()).getGameMode() == MyApplication.SINGLE) {
+        if(((MyApplication)activity.getApplication()).getGameMode() == MyApplication.SINGLE) {
             textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
         }
         else
         {
-            textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID()).getTeamTotalScoreText());
+            textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID() -1).getTeamTotalScoreText());
         }
 
         switch(players.get(position).getTeamID()){
