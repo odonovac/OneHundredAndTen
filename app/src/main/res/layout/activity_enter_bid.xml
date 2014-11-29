@@ -1,46 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tableLayout1"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayoutEnterBid"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <TableRow
-        android:id="@+id/tableRow1"
+    android:layout_height="wrap_content"
+    android:columnCount="5"
+    android:rowCount="3"
+    tools:context=".MainActivity"
+    android:orientation="horizontal"
+    android:useDefaultMargins="true">
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bidRadioGroup">
-         </RadioGroup>
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:baselineAligned="false">
-    <NumberPicker
-        android:id="@+id/bidNumberPicker"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="2" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
+        android:layout_height="300dp"
+        android:id="@android:id/list"
+        android:headerDividersEnabled="true"
+        android:divider="#FFCC00"
+        android:dividerHeight="2dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_columnSpan="5"/>
+        <ImageButton
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:id="@+id/imageButtonMinus"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:src="@drawable/minus"
+            android:scaleType="fitCenter"
+            android:layout_gravity="fill_horizontal|center_vertical"
+            android:background="@null" />
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:id="@+id/playerBid"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:text="0"
+            android:layout_gravity="center_vertical|fill_horizontal"
+            android:gravity="center_vertical|center_horizontal" />
+        <ImageButton
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:id="@+id/imageButtonPlus"
+            android:layout_row="1"
+            android:layout_column="3"
+            android:src="@drawable/plus"
+            android:scaleType="fitCenter"
+            android:layout_gravity="fill_horizontal|center_vertical"
+            android:background="@null"/>
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bidNextBtn"
             android:id="@+id/bidNextBtn"
+            android:layout_row="2"
             android:layout_column="2" />
-    </TableRow>
-</TableLayout>
+</GridLayout>

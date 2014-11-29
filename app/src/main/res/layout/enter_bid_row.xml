@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="8"
+    android:rowCount="2"
+    tools:context=".MainActivity"
+    android:orientation="horizontal"
+    android:useDefaultMargins="true">
+
+    <RadioButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/rbPlayerName"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:text="0"
+        android:id="@+id/playerTotalScore"
+        android:layout_row="0"
+        android:layout_column="3"
+        android:layout_gravity="center_vertical|fill_horizontal"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:id="@+id/imgDealer"
+        android:src="@drawable/dealer_selected"
+        android:layout_row="0"
+        android:layout_column="4"
+        android:clickable="false"
+        android:layout_gravity="center_vertical|fill_horizontal" />
+</GridLayout>
