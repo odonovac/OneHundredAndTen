@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:columnCount="5"
     android:rowCount="3"
-    tools:context=".MainActivity"
+    tools:context=".EnterBid"
     android:orientation="horizontal"
     android:useDefaultMargins="true">
     <ListView
@@ -19,41 +19,46 @@
         android:dividerHeight="2dp"
         android:layout_row="0"
         android:layout_column="0"
-        android:layout_columnSpan="5"/>
-        <ImageButton
-            android:layout_width="49dp"
-            android:layout_height="49dp"
-            android:id="@+id/imageButtonMinus"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:src="@drawable/minus"
-            android:scaleType="fitCenter"
-            android:layout_gravity="fill_horizontal|center_vertical"
-            android:background="@null" />
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:id="@+id/playerBid"
-            android:layout_row="1"
-            android:layout_column="2"
-            android:text="0"
-            android:layout_gravity="center_vertical|fill_horizontal"
-            android:gravity="center_vertical|center_horizontal" />
-        <ImageButton
-            android:layout_width="49dp"
-            android:layout_height="49dp"
-            android:id="@+id/imageButtonPlus"
-            android:layout_row="1"
-            android:layout_column="3"
-            android:src="@drawable/plus"
-            android:scaleType="fitCenter"
-            android:layout_gravity="fill_horizontal|center_vertical"
-            android:background="@null"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bidNextBtn"
-            android:id="@+id/bidNextBtn"
-            android:layout_row="2"
-            android:layout_column="2" />
+        android:layout_columnSpan="5"
+        android:choiceMode="singleChoice"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:smoothScrollbar="false"/>
+    <ImageButton
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:id="@+id/imageButtonMinus"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:src="@drawable/minus"
+        android:scaleType="fitCenter"
+        android:layout_gravity="fill_horizontal|center_vertical"
+        android:background="@null" />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:id="@+id/playerBid"
+        android:layout_row="1"
+        android:layout_column="2"
+        android:text="0"
+        android:layout_gravity="center_vertical|fill_horizontal"
+        android:gravity="center_vertical|center_horizontal" />
+    <ImageButton
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:id="@+id/imageButtonPlus"
+        android:layout_row="1"
+        android:layout_column="3"
+        android:src="@drawable/plus"
+        android:scaleType="fitCenter"
+        android:layout_gravity="fill_horizontal|center_vertical"
+        android:background="@null"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bidNextBtn"
+        android:id="@+id/bidNextBtn"
+        android:layout_row="2"
+        android:layout_column="2" />
 </GridLayout>

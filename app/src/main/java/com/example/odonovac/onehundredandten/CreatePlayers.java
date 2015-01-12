@@ -1,6 +1,9 @@
 package com.example.odonovac.onehundredandten;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.odonovac.onehundredandten.adapters.CreatePlayerAdapter;
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
@@ -26,7 +30,16 @@ public class CreatePlayers extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_players);
 
+        final int gameMode = ((MyApplication)getApplication()).getGameMode();
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setMessage("Message");
+// Set the Icon for the Dialog
+
+
+
         final EditText playerName = (EditText) findViewById(R.id.playerName);
+        final ImageButton info = (ImageButton) findViewById(R.id.infoButton);
         final Button add = (Button) findViewById(R.id.addPlayer);
         final Button done = (Button) findViewById(R.id.doneButton);
         add.setEnabled(false);
@@ -56,18 +69,30 @@ public class CreatePlayers extends ListActivity {
             }
         });
 
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.show();
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int teamID = getNextTeamID(listPlayers.size());
-                listPlayers.add(new PlayerBean(playerName.getText().toString(), 0, teamID));
-                playerName.setText("");
-                view.setEnabled(false);
-                if ((listPlayers.size() > 1) && dealerEnabled(listPlayers))
-                    done.setEnabled(true);
-                else
-                    done.setEnabled(false);
-                playerAdapter.notifyDataSetChanged();
+                if (gameMode == MyApplication.SINGLE || (gameMode == MyApplication.TEAM && listPlayers.size() < 6)) {
+                    int teamID = getNextTeamID(listPlayers.size());
+                    listPlayers.add(new PlayerBean(playerName.getText().toString(), 0, teamID));
+                    playerName.setText("");
+                    view.setEnabled(false);
+                    if ((listPlayers.size() > 1) && dealerEnabled(listPlayers))
+                        done.setEnabled(true);
+                    else
+                        done.setEnabled(false);
+                    playerAdapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"No more than 6 players in team mode.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

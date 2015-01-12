@@ -50,7 +50,7 @@ public class PlayerBean implements Parcelable{
     }
 
     public void setBid(int bid) {
-        this.bid = bid*5;
+        this.bid = bid;
     }
     public void setTeamID(int teamID) {
         this.teamID = teamID;

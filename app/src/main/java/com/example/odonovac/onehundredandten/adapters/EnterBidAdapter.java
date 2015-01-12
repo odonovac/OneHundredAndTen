@@ -2,18 +2,23 @@ package com.example.odonovac.onehundredandten.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.odonovac.onehundredandten.EnterBid;
 import com.example.odonovac.onehundredandten.MyApplication;
 import com.example.odonovac.onehundredandten.R;
 import com.example.odonovac.onehundredandten.beans.PlayerBean;
 import com.example.odonovac.onehundredandten.beans.TeamBean;
+import com.example.odonovac.onehundredandten.layouts.CheckableLinearLayout;
 
 import java.util.ArrayList;
 
@@ -25,8 +30,6 @@ public class EnterBidAdapter extends ArrayAdapter<PlayerBean> {
     private final ArrayList<PlayerBean> players;
     private final ArrayList<TeamBean> teams;
     private final Activity activity;
-    private RadioButton mSelectedRB;
-    private int mSelectedPosition = -1;
 
     public EnterBidAdapter(Context context, Activity activity, ArrayList<PlayerBean> values) {
         super(context, R.layout.enter_bid_row, values );
@@ -36,63 +39,59 @@ public class EnterBidAdapter extends ArrayAdapter<PlayerBean> {
         this.teams = ((MyApplication)activity.getApplication()).getTeams();
     }
 
+    public int getCount() {
+        return this.players.size();
+    }
+
+
+    public long getItemId(int position) {
+        return position;
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view = convertView;
-        ViewHolder holder;
+        EnterBid.ViewHolder holder;
 
         if(view==null)
         {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.enter_bid_row, null);
-            holder = new ViewHolder();
+            holder = new EnterBid.ViewHolder();
             holder.radioPlayer = (RadioButton)view.findViewById(R.id.rbPlayerName);
-            holder.textPlayerTotalScore = (TextView)view.findViewById(R.id.playerTotalScore);
+            //holder.textPlayerTotalScore = (TextView)view.findViewById(R.id.playerTotalScore);
+            holder.imgPlayerTotalScore = (ImageView)view.findViewById(R.id.imgPlayerTotalScore);
             holder.imgDealer = (ImageView)view.findViewById(R.id.imgDealer);
+            holder.position = position;
+            holder.layout = (CheckableLinearLayout) view.findViewById(R.id.GridLayout1);
             view.setTag(holder);
         }else{
-            holder = (ViewHolder)view.getTag();
+            holder = (EnterBid.ViewHolder)view.getTag();
         }
         final PlayerBean player = players.get(position);
 
         holder.radioPlayer.setText(player.getPlayerName());
         if(((MyApplication)activity.getApplication()).getGameMode() == MyApplication.SINGLE) {
-            holder.textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+            //holder.textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+            Bitmap bmp= BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+            int width=bmp.getWidth()/23;
+            int height=bmp.getHeight()/2;
+
+            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((players.get(position).getPlayerTotalScore()/5)*width),0, width, height);
+            holder.imgPlayerTotalScore.setImageBitmap(resizedBitmap);
         }
         else
         {
-            holder.textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID() -1).getTeamTotalScoreText());
+           // holder.textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID() -1).getTeamTotalScoreText());
         }
         if(!players.get(position).isDealer())
             holder.imgDealer.setVisibility(View.INVISIBLE);
 
-        holder.radioPlayer.setOnClickListener(new View.OnClickListener() {
+        final ListView lv = (ListView) parent;
+        holder.layout.setChecked(lv.isItemChecked(position));
 
-            @Override
-            public void onClick(View v) {
-                if(position != mSelectedPosition && mSelectedRB != null){
-                    mSelectedRB.setChecked(false);
-                }
-                mSelectedPosition = position;
-                mSelectedRB = (RadioButton)v;
-            }
-        });
-
-        if(mSelectedPosition != position){
-            holder.radioPlayer.setChecked(false);
-        }else{
-            holder.radioPlayer.setChecked(true);
-            if(mSelectedRB != null && holder.radioPlayer != mSelectedRB){
-                mSelectedRB = holder.radioPlayer;
-            }
-        }
-
-        return view;
+       return view;
     }
-    private class ViewHolder{
-        RadioButton     radioPlayer;
-        TextView        textPlayerTotalScore;
-        ImageView       imgDealer;
-    }
+
 }

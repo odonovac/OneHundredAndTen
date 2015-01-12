@@ -1,10 +1,8 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/GridLayout1"
+    android:id="@+id/CreatePlayersLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:columnCount="1"
-    android:rowCount="5"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:orientation="horizontal">
@@ -15,20 +13,22 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/playerName"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
         android:hint="@string/hintCreatePlayersTextBox"
-        android:layout_row="0"
-        android:layout_column="0"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@android:id/list"
+        android:layout_alignEnd="@android:id/list"
+        android:layout_marginRight="65dp" />
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addCreatePlayersBtn"
         android:id="@+id/addPlayer"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_gravity="left" />
+        android:layout_below="@+id/playerName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="?android:attr/buttonStyleSmall" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -36,20 +36,28 @@
         android:layout_height="wrap_content"
         android:text="@string/nextStepCreatePlayerBtn"
         android:id="@+id/doneButton"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="150dp" />
+        android:layout_alignTop="@+id/addPlayer"
+        android:layout_alignRight="@+id/playerName"
+        android:layout_alignEnd="@+id/playerName" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@android:id/list"
         android:headerDividersEnabled="true"
-        android:layout_marginLeft="0dp"
         android:divider="#FFCC00"
         android:dividerHeight="2dp"
-        android:layout_row="2"
-        android:layout_column="0"/>
+        android:layout_below="@+id/addPlayer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</GridLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoButton"
+        android:layout_alignBottom="@+id/playerName"
+        android:layout_toRightOf="@+id/doneButton"
+        android:layout_toEndOf="@+id/doneButton"
+        android:src="@android:drawable/ic_dialog_info"/>
+
+</RelativeLayout>

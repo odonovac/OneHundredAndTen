@@ -46,33 +46,28 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         View rowView = inflater.inflate(R.layout.keep_scores_row, parent, false);
         TextView textPlayerName = (TextView) rowView.findViewById(R.id.playerName);
         TextView textPlayerScore = (TextView) rowView.findViewById(R.id.playerScore);
-        TextView textPlayerTotalScore = (TextView)rowView.findViewById(R.id.playerTotalScore);
+        //TextView textPlayerTotalScore = (TextView)rowView.findViewById(R.id.playerTotalScore);
 
         ImageView imgBidder = (ImageView)rowView.findViewById(R.id.imgBidder);
         ImageView imgDealer = (ImageView)rowView.findViewById(R.id.imgDealer);
+        ImageView imgPlayerTotalScore = (ImageView) rowView.findViewById(R.id.imgPlayerTotalScore);
 
         ImageButton addTrickImgBtn = (ImageButton) rowView.findViewById(R.id.imageButtonPlus);
         ImageButton minusTrickImgBtn = (ImageButton) rowView.findViewById(R.id.imageButtonMinus);
         textPlayerName.setText(players.get(position).getPlayerName());
         textPlayerScore.setText(players.get(position).getPlayerScoreText());
         if(((MyApplication)activity.getApplication()).getGameMode() == MyApplication.SINGLE) {
-            textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+            //textPlayerTotalScore.setText(players.get(position).getPlayerTotalScoreText());
+            Bitmap bmp= BitmapFactory.decodeResource(context.getResources(), R.drawable.green);
+            int width=bmp.getWidth()/23;
+            int height=bmp.getHeight()/2;
+
+            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((players.get(position).getPlayerTotalScore()/5)*width),0, width, height);
+            imgPlayerTotalScore.setImageBitmap(resizedBitmap);
         }
         else
         {
-            textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID() -1).getTeamTotalScoreText());
-        }
-
-        switch(players.get(position).getTeamID()){
-            case 0:
-                rowView.setBackgroundColor(Color.GRAY);
-                break;
-            case 1:
-                rowView.setBackgroundColor(Color.DKGRAY);
-                break;
-            case 2:
-                rowView.setBackgroundColor(Color.LTGRAY);
-                break;
+            //textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID() -1).getTeamTotalScoreText());
         }
 
         if(!players.get(position).isBidder())
@@ -80,10 +75,10 @@ public class KeepScoresAdapter extends ArrayAdapter<PlayerBean> {
         else
         {
             Bitmap bmp= BitmapFactory.decodeResource(context.getResources(), R.drawable.chips_all);
-            int width=150;
+            int width=100;
             int height=bmp.getHeight();
 
-            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((players.get(position).getBid()/5)*150),0, width, height);
+            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((players.get(position).getBid()/5)*width),0, width, height);
             imgBidder.setImageBitmap(resizedBitmap);
         }
 
