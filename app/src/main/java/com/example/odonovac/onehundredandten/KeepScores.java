@@ -48,6 +48,7 @@ public class KeepScores extends ListActivity {
                     boolean setDealer = false;
                     boolean gameOver = false;
 
+                    String winnerName = "";
 
                     if(((MyApplication)getApplication()).getGameMode() == MyApplication.SINGLE) {
                         playerloop:
@@ -56,6 +57,7 @@ public class KeepScores extends ListActivity {
                             //if this returns true, GAME OVER
                             if (player.updateScore()) {
                                 gameOver = true;
+                                winnerName = player.getPlayerName();
                                 break playerloop;
                             }
                             player.setBidder(false);
@@ -76,6 +78,7 @@ public class KeepScores extends ListActivity {
                             //if this returns true, GAME OVER
                             if (team.updateScore()) {
                                 gameOver = true;
+                                winnerName = team.getTeamPlayersName();
                                 break teamloop;
                             }
                         }
@@ -102,6 +105,7 @@ public class KeepScores extends ListActivity {
                     }
                     else {
                         intent = new Intent(getApplicationContext(), GameOver.class);
+                        intent.putExtra("winnerName",winnerName);
                     }
                     startActivity(intent);
                 }

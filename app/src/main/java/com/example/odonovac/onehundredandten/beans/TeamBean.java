@@ -62,6 +62,17 @@ public class TeamBean implements Parcelable{
     public String getTeamRoundScoreText(){
         return String.valueOf(this.teamRoundScore);
     }
+    public String getTeamPlayersName() {
+        String names = "";
+        int count = 0;
+        for(PlayerBean player : players) {
+            if(count > 0)
+                names += " & ";
+            names += player.getPlayerName();
+            count++;
+        }
+        return names;
+    }
     public boolean updateScore() {
         boolean gameOver = false;
         boolean isBidder = false;
