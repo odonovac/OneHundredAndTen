@@ -7,13 +7,13 @@ android {
     defaultConfig {
         applicationId "com.example.odonovac.onehundredandten"
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

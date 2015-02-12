@@ -79,7 +79,7 @@ public class CreatePlayers extends ListActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (gameMode == MyApplication.SINGLE && listPlayers.size() < 6 || (gameMode == MyApplication.TEAM && listPlayers.size() < 6)) {
+                if (gameMode == MyApplication.SINGLE || (gameMode == MyApplication.TEAM && listPlayers.size() < 6)) {
                     int teamID = getNextTeamID(listPlayers.size());
                     listPlayers.add(new PlayerBean(playerName.getText().toString(), 0, teamID));
                     playerName.setText("");
