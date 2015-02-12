@@ -66,6 +66,7 @@ public class TeamBean implements Parcelable{
         boolean gameOver = false;
         boolean isBidder = false;
         int bid = 0;
+        this.teamRoundScore = 0;
         for(PlayerBean player : players){
             this.teamRoundScore += player.getPlayerRoundScore();
             if (player.isBidder() && isBidder == false)
