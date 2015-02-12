@@ -90,12 +90,12 @@ public class TeamBean implements Parcelable{
         if(isBidder)
         {
            if(teamRoundScore >= bid) {
-               teamTotalScore += teamRoundScore;
+               teamTotalScore += (bid == 30) ? 60 : teamRoundScore;
                if(teamTotalScore >= 110)
                    gameOver=true;
            }
             else {
-               teamTotalScore -= bid;
+               teamTotalScore -= (bid == 30) ? 60 : bid;
                if(teamTotalScore < -110)
                    teamTotalScore = -110;
            }

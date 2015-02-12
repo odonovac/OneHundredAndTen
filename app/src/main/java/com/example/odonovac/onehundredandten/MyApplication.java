@@ -30,6 +30,11 @@ public class MyApplication extends Application {
         teams = new ArrayList<TeamBean>();
     }
 
+    public void reset(){
+        players = new ArrayList<PlayerBean>();
+        teams = new ArrayList<TeamBean>();
+    }
+
     public void setPlayers(ArrayList<PlayerBean> players){
         this.players = players;
     }

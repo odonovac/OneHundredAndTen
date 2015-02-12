@@ -24,6 +24,14 @@ public class GameOver extends Activity {
 
         winners.setText(message + "  won!!!!");
 
+        Button newGameBtn = (Button) findViewById(R.id.newGame);
+
+        newGameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
 
     }
 }

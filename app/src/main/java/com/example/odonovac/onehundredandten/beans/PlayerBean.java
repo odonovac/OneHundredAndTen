@@ -103,12 +103,12 @@ public class PlayerBean implements Parcelable{
         if(isBidder())
         {
            if(playerRoundScore >= bid) {
-               playerTotalScore += playerRoundScore;
+               playerTotalScore += (bid == 30) ? 60 : playerRoundScore;
                if(playerTotalScore >= 110)
                    gameOver=true;
            }
             else {
-               playerTotalScore -= bid;
+               playerTotalScore -= (bid == 30) ? 60 : bid;
                if(playerTotalScore < -110)
                    playerTotalScore = -110;
            }

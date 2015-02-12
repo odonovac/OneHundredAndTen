@@ -20,8 +20,8 @@
         />
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
+        android:layout_width="45dp"
+        android:layout_height="140px"
         android:text="0"
         android:id="@+id/imgPlayerTotalScore"
         android:src="@drawable/green"

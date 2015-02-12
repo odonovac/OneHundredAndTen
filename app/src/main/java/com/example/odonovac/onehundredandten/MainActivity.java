@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CreatePlayers.class);
                 ((MyApplication)getApplication()).setGameMode(MyApplication.SINGLE);
+                ((MyApplication)getApplication()).reset();
                 startActivity(intent);
             }
         });
