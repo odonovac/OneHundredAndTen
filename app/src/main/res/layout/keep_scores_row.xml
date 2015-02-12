@@ -11,34 +11,32 @@
     android:orientation="horizontal"
     android:useDefaultMargins="true">
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
         android:id="@+id/imgBidder"
+        android:src="@drawable/chips_all"
         android:layout_row="0"
         android:layout_column="0"
+        android:layout_width="25dp"
         android:layout_gravity="fill_horizontal|center_vertical" />
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
         android:id="@+id/imgDealer"
         android:src="@drawable/dealer_selected"
         android:layout_row="0"
         android:layout_column="1"
+        android:layout_width="25dp"
         android:layout_gravity="center_vertical|fill_horizontal" />
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
+        android:layout_height="83px"
         android:id="@+id/imgPlayerTotalScore"
-        android:src="@drawable/green"
         android:layout_row="0"
         android:layout_column="2"
+        android:layout_width="30dp"
         android:layout_gravity="center_vertical|fill_horizontal"/>
 
     <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="75dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="145dp"
         android:layout_height="match_parent"
         android:id="@+id/playerName"
         android:autoText="false"
@@ -48,18 +46,16 @@
         android:layout_gravity="center_vertical|fill_horizontal"        />
 
     <ImageButton
-        android:layout_width="49dp"
-        android:layout_height="49dp"
         android:id="@+id/imageButtonMinus"
         android:layout_row="0"
         android:layout_column="4"
+        android:layout_width="25dp"
         android:src="@drawable/minus"
-        android:scaleType="fitCenter"
         android:layout_gravity="fill_horizontal|center_vertical"
         android:background="@null"/>
 
     <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:id="@+id/playerScore"
@@ -71,13 +67,11 @@
 
 
     <ImageButton
-        android:layout_width="49dp"
-        android:layout_height="49dp"
         android:id="@+id/imageButtonPlus"
         android:layout_row="0"
         android:layout_column="6"
+        android:layout_width="25dp"
         android:src="@drawable/plus"
-        android:scaleType="fitCenter"
         android:clickable="false"
         android:layout_gravity="center_vertical|fill_horizontal"
         android:background="@null"/>

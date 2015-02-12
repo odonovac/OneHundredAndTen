@@ -78,12 +78,51 @@ public class EnterBidAdapter extends ArrayAdapter<PlayerBean> {
             int width=bmp.getWidth()/23;
             int height=bmp.getHeight()/2;
 
-            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((players.get(position).getPlayerTotalScore()/5)*width),0, width, height);
+            int score = players.get(position).getPlayerTotalScore();
+            int yOffset = 0;
+            if(score < 0) {
+                score *= -1;
+                yOffset = height;
+            }
+
+            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((score/5)*width),yOffset, width, height);
             holder.imgPlayerTotalScore.setImageBitmap(resizedBitmap);
         }
         else
         {
            // holder.textPlayerTotalScore.setText(teams.get(players.get(position).getTeamID() -1).getTeamTotalScoreText());
+
+           int teamColour = R.drawable.green;
+
+            int teamId = players.get(position).getTeamID();
+
+            switch(teamId){
+                case 1:
+                    teamColour =  R.drawable.green;
+                    break;
+                case 2:
+                    teamColour =  R.drawable.red;
+                    break;
+                case 3:
+                    teamColour =  R.drawable.blue;
+                    break;
+            }
+
+            Bitmap bmp= BitmapFactory.decodeResource(context.getResources(), teamColour);
+
+            int width=bmp.getWidth()/23;
+            int height=bmp.getHeight()/2;
+
+            int score = players.get(position).getPlayerTotalScore();
+            int yOffset = 0;
+            if(score < 0) {
+                score *= -1;
+                yOffset = height;
+            }
+
+            Bitmap resizedBitmap=Bitmap.createBitmap(bmp,((score/5)*width),yOffset, width, height);
+            holder.imgPlayerTotalScore.setImageBitmap(resizedBitmap);
+
         }
         if(!players.get(position).isDealer())
             holder.imgDealer.setVisibility(View.INVISIBLE);
